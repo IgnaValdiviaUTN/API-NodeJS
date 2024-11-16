@@ -58,7 +58,7 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
         // Enviar los resultados al cliente
         res.json(analysis);
     } catch (error) {
-        res.status(500).send('Error procesando la imagen' + error);
+        res.status(500).json({ error: 'Error procesando la imagen', details: error.message });
     } finally {
         // Eliminar el archivo temporal después de procesar
         fs.unlinkSync(imagePath);
@@ -90,7 +90,7 @@ app.post('/analyze/age', upload.single('image'), async (req, res) => {
         // Enviar los resultados al cliente
         res.json(analysis);
     } catch (error) {
-        res.status(500).send('Error procesando la imagen');
+        res.status(500).json({ error: 'Error procesando la imagen', details: error.message });
     } finally {
         // Eliminar el archivo temporal después de procesar
         fs.unlinkSync(imagePath);
